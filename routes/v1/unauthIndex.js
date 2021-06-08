@@ -34,4 +34,15 @@ unAuthV2Router.get("/get-all-user", async (req, res) => {
   }
 });
 
+unAuthV2Router.get("/birth-date", async (req, res) => {
+  try {
+    const result = await userController.birthYear();
+    return res.status(200).send({ success: true, user: result });
+  } catch (err) {
+    return res.status(400).send({
+      success: false,
+      err: err.message || errors.GENERIC_ERROR,
+    });
+  }
+});
 export default unAuthV2Router;

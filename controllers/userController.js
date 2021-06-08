@@ -22,13 +22,13 @@ export default {
 
   async login(req, res) {
     // Write your logic here
-    if (!req.body.email || !req.body.password) {
-      return res.status(400).send({
-        success: false,
-        message:
-          "You have entered Invalid Input, Email and Password field must required...!!!",
-      });
-    }
+    // if (!req.body.email || !req.body.password) {
+    //   return res.status(400).send({
+    //     success: false,
+    //     message:
+    //       "You have entered Invalid Input, Email and Password field must required...!!!",
+    //   });
+    // }
     User.findOne({ email: req.body.email })
       .select("+password") //find query with comparison of name and password from req.body......!!!
       .exec((error, user2) => {
@@ -111,5 +111,16 @@ export default {
     ];
 
     // Your logic here
+    const nowDate = new Date();
+    console.log();
+    let days = [];
+    const getDate = students.map((user) => {
+      const alldates = user.dateOfBirth;
+      const nwdate = new Date(alldates);
+      const diffInTime = nowDate.getTime() - nwdate.getTime();
+      days = diffInTime / (1000 * 3600 * 24);
+
+      console.log(days);
+    });
   },
 };
